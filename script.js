@@ -1,5 +1,5 @@
-$(document).ready(function(){
-  var wallet = 100;
+$(function(){
+
 
   function makeBet(){
     bet = $("input#bet").val();
@@ -18,61 +18,78 @@ $(document).ready(function(){
 
   function checkGuess(){
     if (guess == correctGuess) {
-      $('span').text("congratz!");
+      $("#third-p").text("congratz! you earned: $" + (bet*2));
       doubleMoney();
     } else if (Math.abs(guess - correctGuess) == 1){
-      $('span').text("close, you can keep your money");
+      $("#third-p").text("close, you can keep your money: $" + bet);
     } else {
-    $('span').text("sorry, no good");
+    $("#third-p").text("sorry, no good, I'm taking $" + bet);
       loseMoney();
     };
   }
 
   function loseMoney(){
     wallet-=bet;
+    if (wallet < 5) { 
+      $("#third-p").text("You can't afford another bet, You Lose!");
+      $("#again").toggleClass("invisible");
+      $("#last").toggleClass("invisible");
+    }
   }
+
+  $("#again").click(function(){
+      location.reload();
+  });
    
   function doubleMoney(){
     bet*=2;
     wallet+=bet;
-    console.log(wallet);
   }; 
 
-
+  var wallet = 10;
   var count = 0;
   var guess,
-      correctGuess;
-  $(".button").click(function(e){
+      correctGuess,
+      bet;
+
+  $("#first-button").click(function(e){
     e.preventDefault();
-    count++;
-    if (count % 3 === 1 || count % 3 === 0) {
-      $(".container").toggleClass("invisible");
+    if ($("input#bet").val() <=10 && $("input#bet").val() >= 5){
+      $("#first").toggleClass("invisible");
+      $("#second").toggleClass("invisible");
       makeBet();
       makeRandomNumber();
-    };
-
-    if (count % 3 === 2 || count % 3 === 1){
-      $(".second_container").toggleClass("invisible");
-      makeGuess();
-      if (count % 3 === 2){
-        checkGuess();
-      }
+  
+    } else {
+      $("#first-p").text("Try Again! place a bet between $5 and $10")
     }
-
-    if (count % 3 === 0 || count % 3 === 2){ 
-      $(".third_container").toggleClass("invisible");
-      $("#wallet").text("Wallet amount:" + wallet);
-      $("#input_guess").text("your guess was: " + guess);
-      $("#number").text("The correct guess was: " + correctGuess);
-    }
-   
   });
 
+
+
+  $("#second-button").click(function(e){
+    e.preventDefault();
+      if ($("input#guess").val() <=10 && $("input#bet").val() >= 1){
+      $("#second").toggleClass("invisible");
+      $("#third").toggleClass("invisible");
+      makeGuess();
+      checkGuess();
+      $("#wallet").text("Wallet amount: $" + wallet);
+      $("#input_guess").text("your guess was: " + guess);
+      $("#number").text("The correct guess was: " + correctGuess);
+    } else {
+      $("#first-p").text("Try Again! place a bet between $5 and $10")
+    }
+  });
+
+
+  $("#last").click(function(e){
+    e.preventDefault();
+    $("#third").toggleClass("invisible");
+    $("#first").toggleClass("invisible");
+  })
+
 });
-
-
-
-
 
 
 

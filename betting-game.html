@@ -7,34 +7,43 @@
 </head>
 
 <body>
-  <h1>JavaScript Betting Game</h1>
-  <div class="container">
-    <h2 class="prompt">How much would you like to bet?</h2>
-    <div id="input_form">
-      <form id="input">
-        <input type="text", id='bet' class="bet">
-        <input type="submit", class="button">
-      </form>
-    </div>
-  </div>
-  <div class="second_container invisible">
-   <h2 class="prompt">Guess a number between 1 and 10</h2>
-    <div id="input_form">
-      <form id="input">
-        <input type="text", id='guess' class="guess">
-        <input type="submit", class="button">
-      </form>
-    </div>
-  </div>
-  <div class="third_container invisible">
-    <h2 class="prompt">Result:</h2>
-    <h2 id='wallet'></h2>
-    <h3 id='input_guess'></h3>
-    <h3 id='number'></h3>
-    <input type="submit", class="button", value="bet again">
-  </div>
 
-  <span></span>
+  <div id="game">
+    <h1>JavaScript Betting Game</h1>
+    <div id="first" class="container">
+      <h2 class="prompt">How much would you like to bet?</h2>
+      <div id="input_form">
+        <form id="input">
+          <input type="number", id='bet', class="bet", min="5" max="10">
+          <input type="submit", id='first-button', class="button">
+           <p id="first-p"></p>
+        </form>
+      </div>
+    </div>
+
+    <div id="second" class="container invisible">
+     <h2 class="prompt">Guess a number between 1 and 10</h2>
+      <div id="input_form">
+        <form id="input">
+          <input type="number", id='guess', class="guess", min="1" max="10">
+          <input type="submit", id="second-button", class="button">
+           <p id="second-p"></p>
+        </form>
+      </div>
+    </div>
+
+    <div id="third" class="container invisible">
+      <h2 class="prompt">Result:</h2>
+      <h2 id='wallet'></h2>
+      <h3 id='input_guess'></h3>
+      <h3 id='number'></h3>
+      <input type="submit", id="last", class="button", value="bet again">
+      <p id="third-p"></p>
+    </div>
+
+    <button id="again" class="invisible">Play again</button>
+    
+  </div>
 
 </body>
 </html> 
